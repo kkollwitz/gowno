@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+
+        .godzina{
+            width: 50%;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            font-size: 34px;
+            font-family: "Permanent Marker", cursive;
+            font-weight: 500;
+            color: orange;
+            border: 1px solid grey;
+            align-items: center;
+            height: 200px;
+        }
+
+        #timer{
+            font-size: 38px;
+            font-weight: 700;
+            font-family: "MV Boli";
+        }
+
+    </style>
+
+    <div class="godzina">
+        <p id="zegar"></p>
+    </div>
+
+    <div class="container">
+
+        <center>
+            <p>Podaj liczbę minut</p> 
+            <input type="number" min="0" id="minuty"><br>
+            <button onclick="odliczanie()">Zacznij odliczanie</button>
+            <br>
+            <p id="timer"></p>
+        </center>
+
+    
+
+    </div>  
+
+    <script>
+
+       
+        zegar = document.getElementById('zegar')
+
+        let countdown;
+
+        function zegarek() {
+    
+            czas = new Date()
+            godz = czas.getHours()
+            min = czas.getMinutes()
+            sek = czas.getSeconds()
+            zegar.innerHTML = godz + ':' + min + ':' + sek
+            setInterval(zegarek, 1000) 
+        }
+        zegarek()
+
+        function odliczanie(){
+            const minuty = document.getElementById('minuty').value
+            const koniecCzasu = new Date(Date.now() + minuty * 60000);
+            clearInterval(countdown);
+            function wyswietl(){
+                const pozostalyCzas = koniecCzasu - Date.now()
+                const pozostaleMinuty = Math.floor(pozostalyCzas / 60000)
+                const pozostaleSekundy = Math.floor((pozostalyCzas % 60000) / 1000)
+                document.getElementById('timer').innerHTML = pozostaleMinuty + " : " + pozostaleSekundy
+                if (pozostalyCzas <= 0) {
+                    clearInterval(countdown);
+                    document.getElementById('timer').innerHTML = 'Czas minął';
+                }}
+                wyswietl()
+                setInterval(wyswietl, 1000)
+        }
+
+        
+
+       
+
+
+
+
+
+        
+
+        
+
+        
+
+    </script>
+    
+</body>
+</html>
